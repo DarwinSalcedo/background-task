@@ -11,7 +11,7 @@
     <string name="hint_download">Paste url to download</string>
     <string name="button_loading">We are loading </string>
     <string name="title_activity_detail">DetailActivity</string>
-    <string name="init">click me</string>
+    <string name="init">Click for download</string>
     <string name="start">Starting</string>
     <string name="loading">Loading</string>
     <string name="download">well done </string>
@@ -24,4 +24,5 @@
     <string name="retrofit_url">https://github.com/square/retrofit</string>
     <string name="zip_url">"https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"</string>
     <string name="custom_url">Custom Url</string>
+    <string name="insert_url">Please write a url to process :)</string>
 </resources>

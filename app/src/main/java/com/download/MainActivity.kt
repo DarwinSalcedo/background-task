@@ -12,6 +12,8 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.webkit.URLUtil
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -34,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-
         options.setOnCheckedChangeListener { _, checkedId ->
             customUrl.isEnabled = checkedId == R.id.custom
         }
@@ -46,11 +47,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.project -> download(getString(R.string.project_url))
                 R.id.custom -> {
                     customUrl.isEnabled = true
-                    if (customUrl.text.toString().isNotEmpty())
+                    if (customUrl.text.toString().isNotEmpty() &&  URLUtil.isValidUrl(customUrl.text.toString()))
                         download(customUrl.text.toString())
+                    else{
+                        downloadData.hasErrorDownload()
+                        Toast.makeText(this,getString(R.string.insert_url),Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
+
         createChannel(
             getString(R.string.download_channel_id),
             getString(R.string.download_channel_name)

@@ -69,11 +69,12 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="100dp"
-        app:bgColor="@color/white"
+        app:bgColor="@color/colorPrimaryDark"
+        app:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:textColor="@color/colorPrimaryDark" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
