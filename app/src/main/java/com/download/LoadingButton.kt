@@ -4,9 +4,10 @@ import android.animation.AnimatorInflater
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Typeface
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Typeface
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -20,6 +21,8 @@ class LoadingButton @JvmOverloads constructor(
     companion object {
         const val PROGRESS_COMPLETED_VALUE = 100.0
         const val PROGRESS_INIT_VALUE = 0.0
+        private const val START_ANGLE_POINT = 0.0f
+        private const val CIRCLE_ANGLE_COMPLETED = 360.0f
     }
 
     private var bgColor: Int = Color.WHITE
@@ -27,8 +30,10 @@ class LoadingButton @JvmOverloads constructor(
 
     @Volatile
     private var progress: Double = PROGRESS_INIT_VALUE
+
     private var valueAnimator: ValueAnimator
     private var hasError: Boolean = false
+    private var oval: RectF = RectF()
 
 
     private var buttonState: ButtonState by Delegates.observable(ButtonState.Init) { _, _, _ -> }
@@ -47,6 +52,7 @@ class LoadingButton @JvmOverloads constructor(
     private fun hasCompletedDownload() {
         valueAnimator.cancel()
         buttonState = ButtonState.Completed
+        progress = PROGRESS_INIT_VALUE
         reDraw()
         hasError = false
     }
@@ -71,8 +77,6 @@ class LoadingButton @JvmOverloads constructor(
             0
         )
         try {
-
-            // button back-ground color
             bgColor = attr.getColor(
                 R.styleable.LoadingButton_bgColor,
                 ContextCompat.getColor(context, R.color.colorAccent)
@@ -95,6 +99,14 @@ class LoadingButton @JvmOverloads constructor(
         textAlign = Paint.Align.CENTER
         textSize = 60.0f
         typeface = Typeface.create("", Typeface.BOLD)
+    }
+
+
+    private val paintCircle: Paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        strokeWidth = 10.0f
+        color = Color.RED
     }
 
     override fun performClick(): Boolean {
@@ -135,5 +147,22 @@ class LoadingButton @JvmOverloads constructor(
 
         paint.color = textColor
         canvas.drawText(buttonText, (width / 2).toFloat(), ((height + 30) / 2).toFloat(), paint)
+
+        val size = if (width < height) width.toFloat() else height.toFloat()
+
+        oval.apply {
+            left = 20f
+            top = 20f
+            right = (size - 2 * 20f)
+            bottom = (size - 2 * 20f)
+        }
+
+        canvas.drawArc(
+            oval,
+            START_ANGLE_POINT,
+            ((progress * CIRCLE_ANGLE_COMPLETED) / PROGRESS_COMPLETED_VALUE).toFloat(),
+            false,
+            paintCircle
+        );
     }
 }
