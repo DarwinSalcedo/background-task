@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity"
-    app:layoutDescription="@xml/motion"
-    android:id="@+id/container">
+    app:layoutDescription="@xml/motion">
 
 
     <RadioGroup

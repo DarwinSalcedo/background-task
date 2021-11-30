@@ -3,8 +3,8 @@ package com.download.ui
 import android.app.DownloadManager
 import android.app.NotificationManager
 import android.database.Cursor
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.download.R
 import com.download.cancelNotifications
@@ -36,14 +36,18 @@ class DetailActivity : AppCompatActivity() {
         val c: Cursor = downloadManager.query(q)
         c.moveToFirst().let {
 
-            binding.repositoryName.text =  c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI))
-            binding.status.text = if (c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) getString(
-                R.string.valid
-            ) else getString(R.string.fail)
+            binding.repositoryName.text = c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI))
+            val valid =
+                c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL
+            with(binding.status) {
+                text = if (valid) getString(R.string.valid) else getString(R.string.fail)
+                setTextColor(if (valid) Color.GREEN else Color.RED)
+            }
 
         }
         binding.backButton.setOnClickListener {
-            onBackPressed() }
+            onBackPressed()
+        }
     }
 
 }

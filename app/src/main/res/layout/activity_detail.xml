@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/motion"
+    app:layoutDescription="@xml/motion_inverse"
     tools:context=".ui.DetailActivity">
 
     <TextView
