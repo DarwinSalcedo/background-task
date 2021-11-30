@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Background-task-Project</string>
+    <string name="app_description">Download files from Internet</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="notification_title">Udacity: Android Kotlin Nanodegree </string>
+    <string name="notification_description">The Project 3 repository is downloaded</string>
+    <string name="notification_button">See changes</string>
+    <string name="hint_download">Paste url to download</string>
+    <string name="button_loading">We are loading </string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="init">Click for download</string>
+    <string name="start">Starting</string>
+    <string name="loading">Loading</string>
+    <string name="download">well done </string>
+    <string name="ready">ready</string>
+    <string name="download_channel_id">download_channel</string>
+    <string name="download_channel_name">Downloads</string>
+    <string name="download_description">Your file is ready</string>
+    <string name="glide_url">https://github.com/bumptech/glide</string>
+    <string name="project_url">https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter</string>
+    <string name="retrofit_url">https://github.com/square/retrofit</string>
+    <string name="zip_url">"https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"</string>
+    <string name="custom_url">Custom Url</string>
+    <string name="insert_url">Please write a url to process :)</string>
+    <string name="valid">Valid</string>
+    <string name="fail">Fail</string>
+    <string name="repository">Repository</string>
+    <string name="status">Status</string>
+    <string name="ok">Ok</string>
+</resources>
