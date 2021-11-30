@@ -1,4 +1,4 @@
-package com.download
+package com.download.custom
 
 import android.animation.AnimatorInflater
 import android.animation.ValueAnimator
@@ -11,6 +11,8 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.download.ButtonState
+import com.download.R
 import kotlin.properties.Delegates
 
 
@@ -88,7 +90,6 @@ class LoadingButton @JvmOverloads constructor(
                 ContextCompat.getColor(context, R.color.white)
             )
         } finally {
-            // clearing all the data associated with attribute
             attr.recycle()
         }
     }

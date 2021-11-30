@@ -1,4 +1,4 @@
-package com.download
+package com.download.ui
 
 import android.app.DownloadManager
 import android.app.NotificationManager
@@ -11,12 +11,19 @@ import android.os.Bundle
 import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import com.download.R
+import com.download.createChannel
+import com.download.databinding.ActivityMainBinding
+import com.download.sendNotification
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    private lateinit var scene: MotionScene
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -38,28 +45,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-        options.setOnCheckedChangeListener { _, checkedId ->
-            customUrl.isEnabled = checkedId == R.id.custom
+        binding.options.setOnCheckedChangeListener { _, checkedId ->
+            binding.customUrl.isEnabled = checkedId == R.id.custom
         }
 
-        downloadData.setOnClickListener {
-            when (options.checkedRadioButtonId) {
+        binding.downloadData.setOnClickListener {
+            when (binding.options.checkedRadioButtonId) {
                 R.id.glide -> download(getString(R.string.glide_url))
                 R.id.retrofit -> download(getString(R.string.retrofit_url))
                 R.id.project -> download(getString(R.string.project_url))
                 R.id.custom -> {
-                    customUrl.isEnabled = true
-                    if (customUrl.text.toString()
-                            .isNotEmpty() && URLUtil.isValidUrl(customUrl.text.toString())
+                    binding.customUrl.isEnabled = true
+                    if (binding.customUrl.text.toString()
+                            .isNotEmpty() && URLUtil.isValidUrl(binding.customUrl.text.toString())
                     )
-                        download(customUrl.text.toString())
+                        download(binding.customUrl.text.toString())
                     else {
-                        downloadData.hasErrorDownload()
+                        binding.downloadData.hasErrorDownload()
                         Toast.makeText(this, getString(R.string.insert_url), Toast.LENGTH_SHORT)
                             .show()
                     }

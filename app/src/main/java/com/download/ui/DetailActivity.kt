@@ -1,22 +1,26 @@
-package com.download
+package com.download.ui
 
 import android.app.DownloadManager
 import android.app.NotificationManager
 import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.content_detail.*
+import com.download.R
+import com.download.cancelNotifications
+import com.download.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
     companion object {
         const val FILE_ID = "FILE_ID"
     }
 
+    private lateinit var binding: ActivityDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-        setSupportActionBar(toolbar)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val notificationManager = getSystemService(
             NotificationManager::class.java
@@ -30,15 +34,16 @@ class DetailActivity : AppCompatActivity() {
 
         val q = DownloadManager.Query().setFilterById(fileID!!)
         val c: Cursor = downloadManager.query(q)
-
         c.moveToFirst().let {
 
-            repositoryName.text = c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI))
+            binding.repositoryName.text =  c.getString(c.getColumnIndex(DownloadManager.COLUMN_URI))
+            binding.status.text = if (c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) getString(
+                R.string.valid
+            ) else getString(R.string.fail)
 
-            status.text =
-                if (c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) "valid" else "fail"
         }
-        backButton.setOnClickListener { onBackPressed() }
+        binding.backButton.setOnClickListener {
+            onBackPressed() }
     }
 
 }

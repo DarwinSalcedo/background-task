@@ -11,7 +11,9 @@ import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
-import com.download.DetailActivity.Companion.FILE_ID
+import com.download.ui.DetailActivity
+import com.download.ui.DetailActivity.Companion.FILE_ID
+import com.download.ui.MainActivity
 
 
 private val NOTIFICATION_ID = 0
