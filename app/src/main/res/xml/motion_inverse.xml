@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ConstraintSet android:id="@+id/start">
         <Constraint
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+
+
+        <Constraint
             android:id="@+id/file_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -15,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="1.0"
+            android:scaleX="0.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -28,6 +38,18 @@
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            android:scaleX="3.0"
+            android:scaleY="3.0"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
 
         <Constraint
             android:id="@+id/file_image"
@@ -57,10 +79,7 @@
     <Transition
         app:constraintSetEnd="@+id/end"
         app:constraintSetStart="@+id/start"
-        app:duration="2000">
-        <OnClick
-            app:clickAction="toggle"
-            app:targetId="@id/container" />
+        app:autoTransition="animateToEnd"
+        app:duration="1000">
     </Transition>
-
 </MotionScene>

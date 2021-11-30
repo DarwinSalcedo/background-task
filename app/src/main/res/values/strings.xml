@@ -24,9 +24,9 @@
     <string name="zip_url">"https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"</string>
     <string name="custom_url">Custom Url</string>
     <string name="insert_url">Please write a url to process :)</string>
-    <string name="valid">Valid</string>
-    <string name="fail">Fail</string>
+    <string name="valid">Valid :)</string>
+    <string name="fail">Fail :(</string>
     <string name="repository">Repository</string>
     <string name="status">Status</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
 </resources>

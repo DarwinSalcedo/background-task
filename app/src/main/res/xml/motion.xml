@@ -57,10 +57,9 @@
     <Transition
         app:constraintSetEnd="@+id/end"
         app:constraintSetStart="@+id/start"
-        app:duration="2000">
-        <OnClick
-            app:clickAction="toggle"
-            app:targetId="@id/container" />
+        app:autoTransition="animateToEnd"
+        app:layoutDuringTransition="honorRequest"
+        app:duration="1000">
     </Transition>
 
 </MotionScene>
